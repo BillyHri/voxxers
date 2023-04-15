@@ -7,6 +7,9 @@ local folderpath = "VoxlHopperData"
 local getSettings = folderpath.."\\Settings.json"
 local data3
 
+local function jsone(str) return http:JSONEncode(str) end
+local function jsond(str) return http:JSONDecode(str) end
+
 if isfile(getSettings) then
     data3 = jsond(readfile(getSettings))
 else
@@ -92,7 +95,7 @@ local Embed = {
 			["timestamp"] = string.format('%d-%d-%dT%02d:%02d:%02dZ', Time.year, Time.month, Time.day, Time.hour, Time.min, Time.sec),
 };
 (syn and syn.request or http_request or http.request) {
-    Url = data3["WhaleWebhook"] -- set this to ur own webhook
+    Url = data3["WhaleWebhook"]; -- set this to ur own webhook
     Method = 'POST';
     Headers = {
         ['Content-Type'] = 'application/json';
@@ -115,7 +118,7 @@ local Embed = {
 			["timestamp"] = string.format('%d-%d-%dT%02d:%02d:%02dZ', Time.year, Time.month, Time.day, Time.hour, Time.min, Time.sec),
 };
 (syn and syn.request or http_request or http.request) {
-    Url = data3["EventWebhook"] -- set this to ur own webhook
+    Url = data3["EventWebhook"]; -- set this to ur own webhook
     Method = 'POST';
     Headers = {
         ['Content-Type'] = 'application/json';
