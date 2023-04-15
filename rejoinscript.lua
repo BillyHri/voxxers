@@ -113,7 +113,7 @@ while cursor and #servers <= 0 do
     task.wait()
 end
 local succ,err = pcall(function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/BillyHri/voxxers/main/code.lua"),true)()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/BillyHri/voxxers/main/code.lua",true))()
 end)
 if not succ then
     rconsoleprint("An Error has occursed\nPlease Check: Code script at Line \nError:\n"..err)
