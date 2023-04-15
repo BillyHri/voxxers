@@ -105,7 +105,7 @@ local Embed = {
 };
 end
 
-if Event.Value ~= "None" and Event.Value ~= "Loading" then
+if Event.Value ~= "None" and Event.Value ~= "Loading" and Event.Value ~= "LordStratos" then
 	print("Found event: "..Event.Value)
 local Content = "<@&"..roleDictionary[Event.Value]..">" or ""
 local Embed = {
