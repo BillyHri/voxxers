@@ -92,7 +92,7 @@ local lp = Players.LocalPlayer
 
 local servers = {}
 local cursor = ''
-
+print('a')
 while cursor and #servers <= 0 do
     local req = request({Url = ("https://games.roblox.com/v1/games/%s/servers/Public?sortOrder=Dsc&limit=100&cursor%s"):format(PlaceId,cursor)})
     local body = jsond(req.Body)
