@@ -72,6 +72,8 @@ for i,v in pairs(data2) do
 LastRan = v
 end
 
+print(LastRan)
+print(type(LastRan))
 if (os.time() - LastRan) >= 600 then
     data = {
         JobIds = {}
