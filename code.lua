@@ -3,6 +3,8 @@ local plr = game.Players.LocalPlayer
 local OSTime = os.time()
 local Time = os.date('!*t', OSTime)
 
+print('a')
+
 local roleDictionary = {
 	["VoidEncroaching"] = "1096678199087337562",
 	["BloodMoon"] = "1096678143613472848",
