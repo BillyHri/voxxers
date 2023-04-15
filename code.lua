@@ -82,10 +82,6 @@ end
 
 if Event.Value ~= "None" and Event.Value ~= "Loading" then
 	print("Found event: "..Event.Value)
-rconsoleprint(Event.Value)
-rconsoleprint(roleDictionary[Event.Value])
-rconsoleprint(eventColour[Event.Value])
-rconsoleprint(tonumber(eventColour[Event.Value]))
 local Content = "<@&"..roleDictionary[Event.Value]..">" or ""
 local Embed = {
 			["title"] = "__**EVENT FOUND: **__"..Event.Value,
