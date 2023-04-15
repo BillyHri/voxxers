@@ -3,6 +3,8 @@ local plr = game.Players.LocalPlayer
 local OSTime = os.time()
 local Time = os.date('!*t', OSTime)
 
+local JobId = game.JobId
+
 local http = game:GetService("HttpService")
 
 local folderpath = "VoxlHopperData"
@@ -88,11 +90,11 @@ print("Whale found")
 local Content = '<@&1096678090400333905>'
 local Embed = {
 			["title"] = "__**EVENT FOUND: Sky Whale**__",
-			["description"] = "Players:"..getAllPlayers(),
+			["description"] = "JobId"..JobId.."\nPlayers:"..getAllPlayers(),
 			["type"] = "rich",
 			["color"] = tonumber(0x00ffff),
 			["footer"] = {
-			    ["text"] = "Don't worry if nobody in the server has their joins on."
+			    ["text"] = "If nobody has their joins on, use the JobId to join."
 			},
 			["timestamp"] = string.format('%d-%d-%dT%02d:%02d:%02dZ', Time.year, Time.month, Time.day, Time.hour, Time.min, Time.sec),
 };
@@ -111,11 +113,11 @@ if Event.Value ~= "None" and Event.Value ~= "Loading" and Event.Value ~= "LordSt
 local Content = "<@&"..roleDictionary[Event.Value]..">" or ""
 local Embed = {
 			["title"] = "__**EVENT FOUND: **__"..Event.Value,
-			["description"] = "Players:"..getAllPlayers(),
+			["description"] = "JobId"..JobId.."\nPlayers:"..getAllPlayers(),
 			["type"] = "rich",
 			["color"] = tonumber(eventColour[Event.Value]),
 			["footer"] = {
-			    ["text"] = "Don't worry if nobody in the server has their joins on."
+			    ["text"] = "If nobody has their joins on, use the JobId to join."
 			},
 			["timestamp"] = string.format('%d-%d-%dT%02d:%02d:%02dZ', Time.year, Time.month, Time.day, Time.hour, Time.min, Time.sec),
 };
