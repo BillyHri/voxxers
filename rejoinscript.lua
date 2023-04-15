@@ -8,12 +8,13 @@ local JobId = game.JobId
 local PlaceIdString = tostring(PlaceId)
 
 local folderpath = "VoxlHopperData"
-local PlaceFolder = folderpath.."\\"..PlaceIdString
-local JobIdStorage = PlaceFolder.."\\JobIdStorage.json"
-local getDate = PlaceFolder.."\\LastRan.json"
---local CodeToExecute = PlaceFolder.."\\Code.lua"
+local JobIdStorage = folderpath.."\\JobIdStorage.json"
+local getDate = folderpath.."\\LastRan.json"
+local getSettings = folderpath.."\\Settings.json"
+
 local data
 local data2
+local data3
 local code
 
 local Players = game:FindService("Players")
@@ -28,10 +29,6 @@ if not isfolder(folderpath) then
     print("Created Folder",folderpath)
 end
 
-if not isfolder(PlaceFolder) then
-    makefolder(PlaceFolder)
-    print("Created PlaceFolder",PlaceFolder)
-end
 
 if isfile(JobIdStorage) then
     data = jsond(readfile(JobIdStorage))
@@ -55,6 +52,21 @@ else
     print("Created getDate",getDate)
 end
 
+
+if isfile(getSettings) then
+    data3 = jsond(readfile(getSettings))
+else
+    data3 = {
+        Ascending = false,
+        WhaleWebhook = "",
+        EventWebhook = "",
+    }
+    writefile(getDate,jsone(data3))
+    print("Created getSettings",getSettings)
+end
+
+
+
 local LastRan
 for i,v in pairs(data2) do
 LastRan = v
@@ -73,13 +85,6 @@ if (os.time() - LastRan) >= 600 then
     writefile(JobIdStorage,jsone(data))
 end
 
---[[
-if not isfile(CodeToExecute) then
-    writefile(CodeToExecute,"")
-    print("Created CodeToExecute",CodeToExecute)
-    return 
-end]]
-
 if not table.find(data['JobIds'],JobId) then
     table.insert(data['JobIds'],JobId)
 end
@@ -92,9 +97,17 @@ local lp = Players.LocalPlayer
 
 local servers = {}
 local cursor = ''
-print('a')
+
+local Ascend
+
+if data3["Ascending"] == true then
+    Ascend = 1 -- Ascending
+else
+    Ascend = 2 -- Descending
+end
+
 while cursor and #servers <= 0 do
-    local req = request({Url = ("https://games.roblox.com/v1/games/%s/servers/Public?sortOrder=1&limit=100&cursor%s"):format(PlaceId,cursor)})
+    local req = request({Url = ("https://games.roblox.com/v1/games/%s/servers/Public?sortOrder="..Ascend.."&limit=100&cursor%s"):format(PlaceId,cursor)})
     local body = jsond(req.Body)
     
     if body and body.data then
