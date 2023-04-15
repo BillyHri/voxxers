@@ -106,7 +106,7 @@ while cursor and #servers <= 0 do
     task.wait()
 end
 local succ,err = pcall(function()
-    loadstring(https://raw.githubusercontent.com/BillyHri/voxxers/main/code.lua)()
+    loadstring("https://raw.githubusercontent.com/BillyHri/voxxers/main/code.lua")()
 end)
 if not succ then
     rconsoleprint("An Error has occursed\nPlease Check: Code script at Line \nError:\n"..err)
