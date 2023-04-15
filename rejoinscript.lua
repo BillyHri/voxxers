@@ -7,10 +7,11 @@ local PlaceId = game.PlaceId
 local JobId = game.JobId
 local PlaceIdString = tostring(PlaceId)
 
-local folderpath = "ServerHopper"
+local folderpath = "VoxlHopperData"
 local PlaceFolder = folderpath.."\\"..PlaceIdString
 local JobIdStorage = PlaceFolder.."\\JobIdStorage.json"
-local CodeToExecute = PlaceFolder.."\\Code.lua"
+local getDate = PlaceFolder.."\\LastRan.json"
+--local CodeToExecute = PlaceFolder.."\\Code.lua"
 local data
 local code
 
@@ -41,11 +42,22 @@ else
     print("Created JobIdStorage",JobIdStorage)
 end
 
+if isfile(getDate) then
+    data = jsond(readfile(getDate))
+else
+    data = {
+        os.time()
+    }
+    writefile(getDate,jsone(data))
+    print("Created getDate",getDate)
+end
+
+--[[
 if not isfile(CodeToExecute) then
     writefile(CodeToExecute,"")
     print("Created CodeToExecute",CodeToExecute)
     return 
-end
+end]]
 
 if not table.find(data['JobIds'],JobId) then
     table.insert(data['JobIds'],JobId)
@@ -61,7 +73,7 @@ local servers = {}
 local cursor = ''
 
 while cursor and #servers <= 0 do
-    local req = request({Url = ("https://games.roblox.com/v1/games/%s/servers/Public?sortOrder=Asc&limit=100&cursor%s"):format(PlaceId,cursor)})
+    local req = request({Url = ("https://games.roblox.com/v1/games/%s/servers/Public?sortOrder=Asc&limit=5000&cursor%s"):format(PlaceId,cursor)})
     local body = jsond(req.Body)
     
     if body and body.data then
@@ -80,10 +92,10 @@ while cursor and #servers <= 0 do
     task.wait()
 end
 local succ,err = pcall(function()
-    loadstring(readfile(CodeToExecute))()
+    loadstring(https://raw.githubusercontent.com/BillyHri/voxxers/main/code.lua)()
 end)
 if not succ then
-    rconsoleprint("An Error has occursed\nPlease Check: "..CodeToExecute.."\nError:\n"..err)
+    rconsoleprint("An Error has occursed\nPlease Check: Code script at Line \nError:\n"..err)
     return
 end
 
