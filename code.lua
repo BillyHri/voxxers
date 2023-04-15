@@ -19,6 +19,7 @@ else
         Ascending = false,
         WhaleWebhook = "",
         EventWebhook = "",
+	Exclusions = [],
     }
     writefile(getSettings,jsone(data3))
     print("Created getSettings",getSettings)
@@ -81,7 +82,7 @@ if data3["WhaleWebhook"] == "" or data3["EventWebhook"] == "" then
 end
 
 
-if game.Workspace.Others:FindFirstChild("CloudWhale") then
+if game.Workspace.Others:FindFirstChild("CloudWhale") and not table.find(data3["Exclusions"],"SkyWhale") then
 print("Whale found")
 
 local Content = '<@&1096678090400333905>'
@@ -105,7 +106,7 @@ local Embed = {
 };
 end
 
-if Event.Value ~= "None" and Event.Value ~= "Loading" and Event.Value ~= "LordStratos" then
+if Event.Value ~= "None" and Event.Value ~= "Loading" and Event.Value ~= "LordStratos"  and not table.find(data3["Exclusions"],Event.Value) then
 	print("Found event: "..Event.Value)
 local Content = "<@&"..roleDictionary[Event.Value]..">" or ""
 local Embed = {
