@@ -3,6 +3,8 @@ local plr = game.Players.LocalPlayer
 local OSTime = os.time()
 local Time = os.date('!*t', OSTime)
 
+local http = game:GetService("HttpService")
+
 local folderpath = "VoxlHopperData"
 local getSettings = folderpath.."\\Settings.json"
 local data3
