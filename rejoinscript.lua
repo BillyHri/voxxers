@@ -87,7 +87,7 @@ local servers = {}
 local cursor = ''
 
 while cursor and #servers <= 0 do
-    local req = request({Url = ("https://games.roblox.com/v1/games/%s/servers/Public?sortOrder=Asc&limit=5000&cursor%s"):format(PlaceId,cursor)})
+    local req = request({Url = ("https://games.roblox.com/v1/games/%s/servers/Public?sortOrder=Asc&limit=100&cursor%s"):format(PlaceId,cursor)})
     local body = jsond(req.Body)
     
     if body and body.data then
