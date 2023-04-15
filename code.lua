@@ -3,7 +3,21 @@ local plr = game.Players.LocalPlayer
 local OSTime = os.time()
 local Time = os.date('!*t', OSTime)
 
-print('a')
+local folderpath = "VoxlHopperData"
+local getSettings = folderpath.."\\Settings.json"
+local data3
+
+if isfile(getSettings) then
+    data3 = jsond(readfile(getSettings))
+else
+    data3 = {
+        Ascending = false,
+        WhaleWebhook = "",
+        EventWebhook = "",
+    }
+    writefile(getSettings,jsone(data3))
+    print("Created getSettings",getSettings)
+end
 
 local roleDictionary = {
 	["VoidEncroaching"] = "1096678199087337562",
@@ -56,6 +70,10 @@ print(stringab)
 return stringab
 end
 
+if data3["WhaleWebhook"] == "" or data3["EventWebhook"] == "" then
+	rconsoleprint("Missing webhook in either whale event or eventwebhook. Look in your workspace folder for 'VoxlHopperData', then go into settings and change it."
+	return
+end
 
 
 if game.Workspace.Others:FindFirstChild("CloudWhale") then
@@ -73,7 +91,7 @@ local Embed = {
 			["timestamp"] = string.format('%d-%d-%dT%02d:%02d:%02dZ', Time.year, Time.month, Time.day, Time.hour, Time.min, Time.sec),
 };
 (syn and syn.request or http_request or http.request) {
-    Url = 'https://discord.com/api/webhooks/1096676860563312651/_MwctchliRJ9ohPX0TmoOC8du7WNIu7A76np1I7BdF8kAmbycpFbJIctnupDVczZPuAY'; -- set this to ur own webhook
+    Url = data3["WhaleWebhook"] -- set this to ur own webhook
     Method = 'POST';
     Headers = {
         ['Content-Type'] = 'application/json';
@@ -96,7 +114,7 @@ local Embed = {
 			["timestamp"] = string.format('%d-%d-%dT%02d:%02d:%02dZ', Time.year, Time.month, Time.day, Time.hour, Time.min, Time.sec),
 };
 (syn and syn.request or http_request or http.request) {
-    Url = 'https://discord.com/api/webhooks/1096676860563312651/_MwctchliRJ9ohPX0TmoOC8du7WNIu7A76np1I7BdF8kAmbycpFbJIctnupDVczZPuAY'; -- set this to ur own webhook
+    Url = data3["EventWebhook"] -- set this to ur own webhook
     Method = 'POST';
     Headers = {
         ['Content-Type'] = 'application/json';
