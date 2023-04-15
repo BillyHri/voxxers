@@ -90,7 +90,7 @@ print("Whale found")
 local Content = '<@&1096678090400333905>'
 local Embed = {
 			["title"] = "__**EVENT FOUND: Sky Whale**__",
-			["description"] = "JobId"..JobId.."\nPlayers:"..getAllPlayers(),
+			["description"] = "JobId:\n"..JobId.."\nPlayers:"..getAllPlayers(),
 			["type"] = "rich",
 			["color"] = tonumber(0x00ffff),
 			["footer"] = {
@@ -113,7 +113,7 @@ if Event.Value ~= "None" and Event.Value ~= "Loading" and Event.Value ~= "LordSt
 local Content = "<@&"..roleDictionary[Event.Value]..">" or ""
 local Embed = {
 			["title"] = "__**EVENT FOUND: **__"..Event.Value,
-			["description"] = "JobId"..JobId.."\nPlayers:"..getAllPlayers(),
+			["description"] = "JobId:\n"..JobId.."\nPlayers:"..getAllPlayers(),
 			["type"] = "rich",
 			["color"] = tonumber(eventColour[Event.Value]),
 			["footer"] = {
