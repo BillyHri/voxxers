@@ -19,7 +19,7 @@ else
         Ascending = false,
         WhaleWebhook = "",
         EventWebhook = "",
-	Exclusions = [],
+	Exclusions = {},
     }
     writefile(getSettings,jsone(data3))
     print("Created getSettings",getSettings)
