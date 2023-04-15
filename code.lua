@@ -76,7 +76,7 @@ return stringab
 end
 
 if data3["WhaleWebhook"] == "" or data3["EventWebhook"] == "" then
-	rconsoleprint("Missing webhook in either whale event or eventwebhook. Look in your workspace folder for 'VoxlHopperData', then go into settings and change it.")
+	rconsoleprint("\n Missing webhook in either whale event or eventwebhook. Look in your workspace folder for 'VoxlHopperData', then go into settings and change it.")
 	return
 end
 
