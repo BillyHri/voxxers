@@ -42,14 +42,28 @@ else
     print("Created JobIdStorage",JobIdStorage)
 end
 
+time = os.time()
+
 if isfile(getDate) then
     data = jsond(readfile(getDate))
 else
     data = {
-        os.time()
+        time
     }
     writefile(getDate,jsone(data))
     print("Created getDate",getDate)
+end
+
+local LastRan
+for i,v in pairs(data) do
+LastRan = v
+end
+
+if (os.time() - LastRan) >= 600 then
+    data = {
+        JobIds = {}
+    }
+    writefile(JobIdStorage,jsone(data))
 end
 
 --[[
