@@ -61,7 +61,7 @@ else
         WhaleWebhook = "",
         EventWebhook = "",
     }
-    writefile(getDate,jsone(data3))
+    writefile(getSettings,jsone(data3))
     print("Created getSettings",getSettings)
 end
 
