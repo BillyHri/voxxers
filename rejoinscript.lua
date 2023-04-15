@@ -13,6 +13,7 @@ local JobIdStorage = PlaceFolder.."\\JobIdStorage.json"
 local getDate = PlaceFolder.."\\LastRan.json"
 --local CodeToExecute = PlaceFolder.."\\Code.lua"
 local data
+local data2
 local code
 
 local Players = game:FindService("Players")
@@ -45,17 +46,17 @@ end
 time = os.time()
 
 if isfile(getDate) then
-    data = jsond(readfile(getDate))
+    data2 = jsond(readfile(getDate))
 else
-    data = {
+    data2 = {
         time
     }
-    writefile(getDate,jsone(data))
+    writefile(getDate,jsone(data2))
     print("Created getDate",getDate)
 end
 
 local LastRan
-for i,v in pairs(data) do
+for i,v in pairs(data2) do
 LastRan = v
 end
 
@@ -63,6 +64,12 @@ if (os.time() - LastRan) >= 600 then
     data = {
         JobIds = {}
     }
+    time = os.time()
+    data2 = {
+        time
+    }
+    
+    writefile(getDate,jsone(data2))
     writefile(JobIdStorage,jsone(data))
 end
 
