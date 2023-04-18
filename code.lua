@@ -87,7 +87,7 @@ end
 if game.Workspace.Others:FindFirstChild("CloudWhale") and not table.find(data3["Exclusions"],"SkyWhale") then
 print("Whale found")
 
-local Content = '<@&1096678090400333905>'
+local Content = '<@&'..data3["RoleData"]["SkyWhale"]..'>' or ""
 local Embed = {
 			["title"] = "__**EVENT FOUND: Sky Whale**__",
 			["description"] = "**JobId:**\n"..JobId.."\n**Players:**"..getAllPlayers(),
@@ -110,7 +110,7 @@ end
 
 if Event.Value ~= "None" and Event.Value ~= "Loading" and Event.Value ~= "LordStratos"  and not table.find(data3["Exclusions"],Event.Value) then
 	print("Found event: "..Event.Value)
-local Content = "<@&"..roleDictionary[Event.Value]..">" or ""
+local Content = "<@&"..data3["RoleData"][Event.Value]..">" or ""
 local Embed = {
 			["title"] = "__**EVENT FOUND: **__"..Event.Value,
 			["description"] = "**JobId:**\n"..JobId.."\n**Players:**"..getAllPlayers(),
