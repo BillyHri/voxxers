@@ -57,10 +57,16 @@ if isfile(getSettings) then
     data3 = jsond(readfile(getSettings))
 else
     data3 = {
-        Ascending = false,
+        Ascending = true,
         WhaleWebhook = "",
         EventWebhook = "",
         Exclusions = {},
+        RoleData = {
+		    ["VoidEncroaching"] = "",
+		    ["BloodMoon"] = "",
+		    ["HarvestMoon"] = "",
+		    ["SkyWhale"] = "",
+	    },
     }
     writefile(getSettings,jsone(data3))
     print("Created getSettings",getSettings)
@@ -93,6 +99,34 @@ if not table.find(data['JobIds'],JobId) then
 end
 
 writefile(JobIdStorage,jsone(data))
+
+local SettingsTemplate = {
+        Ascending = true,
+        WhaleWebhook = "",
+        EventWebhook = "",
+        Exclusions = {},
+        RoleData = {
+		    ["VoidEncroaching"] = "",
+		    ["BloodMoon"] = "",
+		    ["HarvestMoon"] = "",
+		    ["SkyWhale"] = "",
+	    },
+}
+
+
+function CheckConsistency(sample, template)
+	for a, b in pairs(template) do
+		if sample[a] == nil then
+			sample[a] = template[a]
+		end
+		if type(b) == 'table' then 
+			CheckConsistency(sample[a], template[a])
+		end
+	end
+	return sample
+end
+
+writefile(getSettings,jsone(CheckConsistency(data3, SettingsTemplate)))
 
 repeat task.wait() until game:IsLoaded() and Players.LocalPlayer
 
